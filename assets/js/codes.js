@@ -51,15 +51,14 @@ function render() {
   codesEl.innerHTML = "";
 
   if (!filtered.length) {
-    codesEl.innerHTML = `<div class="empty">No matching service code found.</div>`;
+    codesEl.innerHTML = `<tr><td class="empty" colspan="3">No matching service code found.</td></tr>`;
     return;
   }
 
   for (const item of filtered) {
-    const card = document.createElement("article");
-    card.className = "code-card";
-    card.innerHTML = `<span class="code">${item.code}</span><h2>${item.name}</h2><div class="category">${item.category}</div>`;
-    codesEl.appendChild(card);
+    const row = document.createElement("tr");
+    row.innerHTML = `<td><span class="service-name">${item.name}</span></td><td><span class="code">${item.code}</span></td><td><span class="category">${item.category}</span></td>`;
+    codesEl.appendChild(row);
   }
 }
 
