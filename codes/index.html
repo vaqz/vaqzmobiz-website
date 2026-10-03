@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vaqz Mobiz service code reference — a quick guide to internal product codes.">
+  <title>Service Codes — Vaqz Mobiz</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="Vaqz Mobiz home">VAQZ <span>MOBIZ</span></a>
+    <nav aria-label="Primary navigation"><a href="./">Service Codes</a></nav>
+  </header>
+
+  <main class="container page">
+    <section class="page-header">
+      <p class="eyebrow">VAQZ MOBIZ · REFERENCE</p>
+      <h1>Service Code Reference</h1>
+      <p>Use these Vaqz Mobiz internal codes when asking about a service or placing an order. Search by code, service name, or category.</p>
+    </section>
+
+    <section aria-label="Service code search">
+      <div class="toolbar">
+        <input id="search" class="search" type="search" placeholder="Search a code or service…" autocomplete="off" aria-label="Search service codes">
+        <select id="category" class="filter" aria-label="Filter by category">
+          <option value="all">All categories</option>
+        </select>
+      </div>
+      <p id="count" class="category" aria-live="polite"></p>
+      <div id="codes" class="codes-grid" aria-live="polite"></div>
+    </section>
+
+    <section class="info-grid" aria-label="Customer information">
+      <article class="info-card"><h2>How to order</h2><p>Send the service code together with the plan or duration you want. Example: <strong>SPOT — 1 Month</strong>.</p></article>
+      <article class="info-card"><h2>Codes can change</h2><p>Vaqz Mobiz may add, remove, or update internal codes. Always use the latest reference on this page.</p></article>
+      <article class="info-card"><h2>Need help?</h2><p>If you are unsure which code to use, contact Vaqz Mobiz before placing your order.</p></article>
+    </section>
+
+    <aside class="notice">
+      <strong>Important notice:</strong> The codes on this page are Vaqz Mobiz internal reference identifiers. They are not official product codes of any third-party service provider. Third-party names and trademarks belong to their respective owners. Vaqz Mobiz is not affiliated with, endorsed by, or sponsored by those providers unless explicitly stated. Product availability, features, pricing, and account conditions may vary.
+    </aside>
+  </main>
+
+  <footer class="site-footer"><div class="container">© <span id="year"></span> Vaqz Mobiz. All rights reserved.</div></footer>
+  <script src="../assets/js/codes.js"></script>
+</body>
+</html>
