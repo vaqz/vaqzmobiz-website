@@ -103,18 +103,21 @@ document.getElementById('order-form').addEventListener('submit', event => {
     'Customer: ' + form.get('customer_name'),
     'Mobile: ' + form.get('mobile'),
     'Email: ' + (form.get('email') || 'Not provided'),
-    'Delivery address / preferred pickup: ' + form.get('delivery_address'),
+    'Fulfillment method: ' + form.get('fulfillment'),
+    'Delivery address / pickup details: ' + form.get('delivery_address'),
     'Phone model / compatibility notes: ' + (form.get('compatibility') || 'Not provided'),
     '',
     'Requested items:',
     ...lines,
     'Indicative subtotal (not final): ' + peso(total),
-    'Delivery fee: to be confirmed',
+    'Delivery / courier fee: to be confirmed where applicable',
+    'Pickup arrangements: confirm location, schedule, and readiness before visiting',
+    'Supplier sourcing: availability, final price, and realistic lead time must be confirmed first',
     'Final total: to be confirmed by VM Hub',
     '',
     'Notes: ' + (form.get('notes') || 'None'),
     '',
-    'Please confirm stock, exact compatibility, final price, delivery fee, and expected delivery date before payment.'
+    'Please confirm stock or supplier availability, exact compatibility, final price, fulfillment fee if any, and realistic delivery/pickup/sourcing timing before payment.'
   ].join('\n');
   window.open('https://wa.me/639481467951?text=' + encodeURIComponent(message), '_blank', 'noopener');
 });
