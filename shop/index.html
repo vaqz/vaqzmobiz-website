@@ -73,23 +73,63 @@
         <label>Full name *<input name="customer_name" autocomplete="name" required></label>
         <label>Mobile number *<input name="mobile" autocomplete="tel" type="tel" required></label>
         <label>Email (optional)<input name="email" autocomplete="email" type="email"></label>
-        <label>Delivery address or preferred pickup *<input name="delivery_address" autocomplete="street-address" required></label>
+        <label>Fulfillment method *
+          <select name="fulfillment" id="fulfillment" required>
+            <option value="">Choose delivery or pickup</option>
+            <option value="Local delivery — Butuan City">Local delivery — Butuan City</option>
+            <option value="Nationwide courier shipping">Nationwide courier shipping — Philippines</option>
+            <option value="Store pickup — subject to confirmation">Store pickup — subject to confirmation</option>
+            <option value="Supplier sourcing request">Request an item to be sourced from a supplier</option>
+          </select>
+        </label>
+        <label id="address-label">Delivery address / pickup details *<input name="delivery_address" id="delivery-address" autocomplete="street-address" placeholder="Enter full delivery address or pickup preference" required></label>
         <label class="full">Phone brand and exact model<input name="compatibility" placeholder="e.g. iPhone 15 Pro Max"></label>
+        <p class="section-subtitle full" id="fulfillment-help">We will confirm stock, final price, delivery or pickup arrangements, and realistic timing before accepting the order.</p>
         <label class="full">Notes (optional)<textarea name="notes" rows="3" placeholder="Color preference or questions"></textarea></label>
         <button class="button full" type="submit">Send order request via WhatsApp</button>
       </form>
-      <p class="section-subtitle">Submitting sends a request only. VM Hub must confirm stock, model fit, final prices, delivery fees and timing. Do not pay until you receive an official order confirmation.</p>
+      <p class="section-subtitle">Submitting sends a request only. Local delivery is for Butuan City; nationwide orders are subject to courier coverage and fees. Store pickup must be confirmed in advance. Items sourced from suppliers require availability, final price, and a realistic lead time to be confirmed. Do not pay until you receive an official order confirmation.</p>
     </section>
     <section class="shop-info" aria-label="Customer information">
       <article><h2>Business address</h2><p>VM Hub Cellphone and Accessories<br>R. Calo St., Butuan City, Agusan del Norte 8600, Philippines</p></article>
       <article id="contact"><h2>Contact the store</h2><p>Mobile: <a href="tel:+639481467951">+63 948 146 7951</a><br>Email: <a href="mailto:katebaguio@gmail.com">katebaguio@gmail.com</a><br><a href="https://www.facebook.com/share/1B7fz9x1uZ" target="_blank" rel="noopener noreferrer">Facebook page</a></p></article>
-      <article><h2>Order and delivery</h2><p>Delivery method, fee, stock, final price and expected arrival date are confirmed individually before payment.</p></article>
+      <article><h2>Ways to receive your order</h2><p>Local delivery in Butuan City, courier shipping to other Philippine locations, confirmed store pickup, or supplier sourcing on request. Fees, stock, price, and realistic timing are confirmed individually.</p></article>
     </section>
     <nav class="policy-links" aria-label="Store policies"><a href="policies.html#shipping">Shipping & Delivery</a><a href="policies.html#returns">Returns & Refunds</a><a href="policies.html#privacy">Privacy Policy</a><a href="policies.html#terms">Terms of Sale</a></nav>
     <aside class="notice"><strong>Pricing and stock notice:</strong> Displayed prices are indicative estimates based on public Philippine retail listings and must be verified against actual supplier cost and inventory. A request is not an accepted order. No payment is collected on this website.</aside>
   </main>
   <footer class="site-footer"><div class="container">© <span id="year"></span> VM Hub Cellphone and Accessories. All rights reserved.</div></footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    const fulfillmentSelect = document.getElementById('fulfillment');
+    const addressLabel = document.getElementById('address-label');
+    const addressInput = document.getElementById('delivery-address');
+    const fulfillmentHelp = document.getElementById('fulfillment-help');
+    fulfillmentSelect.addEventListener('change', () => {
+      const value = fulfillmentSelect.value;
+      if (value === 'Local delivery — Butuan City') {
+        addressLabel.firstChild.textContent = 'Complete address in Butuan City *';
+        addressInput.placeholder = 'House/building, street, barangay, Butuan City';
+        fulfillmentHelp.textContent = 'Delivery fee and estimated arrival will be confirmed before order acceptance.';
+      } else if (value === 'Nationwide courier shipping') {
+        addressLabel.firstChild.textContent = 'Complete Philippine delivery address *';
+        addressInput.placeholder = 'House/building, street, barangay, city/municipality, province, ZIP';
+        fulfillmentHelp.textContent = 'Courier availability, shipping fee, and estimated transit time will be confirmed for your destination.';
+      } else if (value === 'Store pickup — subject to confirmation') {
+        addressLabel.firstChild.textContent = 'Pickup preference or notes *';
+        addressInput.placeholder = 'Preferred pickup date/time; wait for confirmation before visiting';
+        fulfillmentHelp.textContent = 'Pickup location, schedule, and item readiness must be confirmed before you visit.';
+      } else if (value === 'Supplier sourcing request') {
+        addressLabel.firstChild.textContent = 'Your location / preferred receiving method *';
+        addressInput.placeholder = 'City/province and whether you prefer delivery, courier, or pickup';
+        fulfillmentHelp.textContent = 'For items not in stock, VM Hub will first check supplier availability, final price, and a realistic sourcing lead time.';
+      } else {
+        addressLabel.firstChild.textContent = 'Delivery address / pickup details *';
+        addressInput.placeholder = 'Enter full delivery address or pickup preference';
+        fulfillmentHelp.textContent = 'We will confirm stock, final price, delivery or pickup arrangements, and realistic timing before accepting the order.';
+      }
+    });
+  </script>
   <script src="./catalog.js"></script>
 
 </body>
