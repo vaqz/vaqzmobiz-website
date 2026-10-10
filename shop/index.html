@@ -14,7 +14,7 @@
     .shop-notice{margin:20px 0;padding:14px 16px;border:1px solid #795d28;border-radius:12px;background:rgba(234,179,8,.08);color:#f4d68c;font-size:.88rem}
     .category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:20px 0 34px}.category-link{display:block;padding:14px 12px;border:1px solid var(--vm-border);border-radius:14px;background:var(--vm-surface);text-decoration:none}.category-link strong{display:block;font-size:.92rem}.category-link span{display:block;margin-top:4px;color:var(--vm-muted);font-size:.78rem}
     .catalog-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:28px 0 14px}.catalog-heading h2{margin:0;font-size:1.35rem}.catalog-heading p{margin:4px 0 0;color:var(--vm-muted);font-size:.86rem}
-    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.product-card{overflow:hidden;border:1px solid var(--vm-border);border-radius:16px;background:var(--vm-surface)}.product-art{display:grid;place-items:center;aspect-ratio:4/3;background:linear-gradient(145deg,#1b2940,#101725);color:#9dc7ff}.product-art svg{width:70px;height:70px}.product-info{padding:15px}.product-info .product-type{margin:0 0 5px;color:#8bbcff;font-size:.7rem;font-weight:850;letter-spacing:.09em;text-transform:uppercase}.product-info h3{margin:0 0 7px;font-size:1rem}.product-info p{margin:0;color:var(--vm-muted);font-size:.84rem}.product-price{margin-top:13px;padding-top:11px;border-top:1px solid var(--vm-border);font-size:.85rem;font-weight:750}.availability-label{display:inline-block;margin-top:9px;color:#f4d68c;font-size:.75rem;font-weight:700}
+    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.product-card{overflow:hidden;border:1px solid var(--vm-border);border-radius:16px;background:var(--vm-surface)}.product-art{display:grid;place-items:center;aspect-ratio:4/3;background:linear-gradient(145deg,#1b2940,#101725);color:#9dc7ff}.product-art svg{width:70px;height:70px}.product-info{padding:15px}.product-info .product-type{margin:0 0 5px;color:#8bbcff;font-size:.7rem;font-weight:850;letter-spacing:.09em;text-transform:uppercase}.product-info h3{margin:0 0 7px;font-size:1rem}.product-info p{margin:0;color:var(--vm-muted);font-size:.84rem}.product-price{margin-top:13px;padding-top:11px;border-top:1px solid var(--vm-border);font-size:.85rem;font-weight:750}.availability-label{display:inline-block;margin-top:9px;color:#f4d68c;font-size:.75rem;font-weight:700}.product-buy{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}.product-buy label{font-size:.8rem;color:var(--vm-muted)}.qty-input{width:58px;padding:8px;border-radius:8px;border:1px solid var(--vm-border);background:#0c1220;color:#fff}.add-to-cart{min-height:38px;padding:0 11px;font-size:.78rem;border:0;cursor:pointer}.cart-section{margin:38px 0;padding:22px;border:1px solid var(--vm-border);border-radius:18px;background:var(--vm-surface)}.cart-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--vm-border);font-size:.86rem}.remove-item{background:transparent;border:0;color:#f4a7a7;cursor:pointer}.cart-total{display:flex;justify-content:space-between;gap:12px;padding:16px 0;font-weight:800}.checkout-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.checkout-form label{display:grid;gap:6px;font-size:.84rem;color:var(--vm-muted)}.checkout-form input,.checkout-form textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--vm-border);background:#0c1220;color:#fff;font:inherit}.checkout-form .full{grid-column:1/-1}.checkout-form button{border:0;cursor:pointer}.policy-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}.policy-links a{color:#9dc7ff;font-size:.84rem}
     .shop-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}.shop-info article{padding:17px;border:1px solid var(--vm-border);border-radius:14px;background:var(--vm-surface)}.shop-info h2{margin:0 0 6px;font-size:.98rem}.shop-info p{margin:0;color:var(--vm-muted);font-size:.84rem}
     @media(max-width:700px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.shop-info{grid-template-columns:1fr}.shop-hero{padding-top:34px}}
     @media(max-width:420px){.product-grid{grid-template-columns:1fr}.catalog-heading{display:block}}
@@ -65,16 +65,32 @@
       <div class="product-grid" id="product-grid"></div>
     </section>
 
-    <section class="shop-info" aria-label="Customer information">
-      <article><h2>Product compatibility</h2><p>Confirm your phone brand and exact model so we can help match the right case or accessory.</p></article>
-      <article><h2>Order and delivery</h2><p>Shipping areas, delivery fees, lead times, and order procedures will be published after they are confirmed.</p></article>
-      <article id="contact"><h2>Contact the store</h2><p>Store contact details and business address must be added and verified before this page is published for merchant review.</p></article>
+    <section class="cart-section" id="order-cart" aria-labelledby="cart-title">
+      <div class="catalog-heading"><div><h2 id="cart-title">Your order request <span id="cart-count">0</span></h2><p>Submit a request through WhatsApp. This page does not accept payment or confirm stock.</p></div></div>
+      <div id="cart-items"><p class="section-subtitle">Your order list is empty. Add products above to request availability.</p></div>
+      <div class="cart-total"><span>Indicative subtotal (not final)</span><span id="cart-total">₱0</span></div>
+      <form id="order-form" class="checkout-form">
+        <label>Full name *<input name="customer_name" autocomplete="name" required></label>
+        <label>Mobile number *<input name="mobile" autocomplete="tel" type="tel" required></label>
+        <label>Email (optional)<input name="email" autocomplete="email" type="email"></label>
+        <label>Delivery address or preferred pickup *<input name="delivery_address" autocomplete="street-address" required></label>
+        <label class="full">Phone brand and exact model<input name="compatibility" placeholder="e.g. iPhone 15 Pro Max"></label>
+        <label class="full">Notes (optional)<textarea name="notes" rows="3" placeholder="Color preference or questions"></textarea></label>
+        <button class="button full" type="submit">Send order request via WhatsApp</button>
+      </form>
+      <p class="section-subtitle">Submitting sends a request only. VM Hub must confirm stock, model fit, final prices, delivery fees and timing. Do not pay until you receive an official order confirmation.</p>
     </section>
-
-    <aside class="notice"><strong>Before launch:</strong> Replace draft examples with actual products, current prices, stock status, genuine product images, confirmed store address and contact details. Add the full order/checkout flow, delivery and return policies, privacy policy, and terms of service before submitting this website for payment-provider review.</aside>
+    <section class="shop-info" aria-label="Customer information">
+      <article><h2>Business address</h2><p>VM Hub Cellphone and Accessories<br>R. Calo St., Butuan City, Agusan del Norte 8600, Philippines</p></article>
+      <article id="contact"><h2>Contact the store</h2><p>Mobile: <a href="tel:+639481467951">+63 948 146 7951</a><br>Email: <a href="mailto:katebaguio@gmail.com">katebaguio@gmail.com</a><br><a href="https://www.facebook.com/share/1B7fz9x1uZ" target="_blank" rel="noopener noreferrer">Facebook page</a></p></article>
+      <article><h2>Order and delivery</h2><p>Delivery method, fee, stock, final price and expected arrival date are confirmed individually before payment.</p></article>
+    </section>
+    <nav class="policy-links" aria-label="Store policies"><a href="policies.html#shipping">Shipping & Delivery</a><a href="policies.html#returns">Returns & Refunds</a><a href="policies.html#privacy">Privacy Policy</a><a href="policies.html#terms">Terms of Sale</a></nav>
+    <aside class="notice"><strong>Pricing and stock notice:</strong> Displayed prices are indicative estimates based on public Philippine retail listings and must be verified against actual supplier cost and inventory. A request is not an accepted order. No payment is collected on this website.</aside>
   </main>
   <footer class="site-footer"><div class="container">© <span id="year"></span> VM Hub Cellphone and Accessories. All rights reserved.</div></footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="./catalog.js"></script>
   <script src="./catalog.js"></script>
 </body>
 </html>
