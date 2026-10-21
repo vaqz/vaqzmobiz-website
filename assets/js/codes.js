@@ -1,5 +1,5 @@
 const services = [
-  { code: "Netx", name: "Netflix", category: "Entertainment" },
+  { code: "NETX", name: "Netflix", category: "Entertainment" },
   { code: "CPCT", name: "CapCut", category: "Creative" },
   { code: "DISN", name: "Disney+", category: "Entertainment" },
   { code: "PRME", name: "Prime Video", category: "Entertainment" },
