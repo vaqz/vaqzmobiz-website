@@ -8,7 +8,6 @@
   <title>Contact Support — Vaqz Mobiz</title>
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <style>
     .contact-form{display:grid;gap:16px}
     .form-field{display:grid;gap:7px}
@@ -118,6 +117,12 @@
           theme: "dark"
         });
       };
+
+      const turnstileScript = document.createElement("script");
+      turnstileScript.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit";
+      turnstileScript.async = true;
+      turnstileScript.defer = true;
+      document.head.appendChild(turnstileScript);
 
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
