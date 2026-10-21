@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Contact Vaqz Mobiz support for help with an order or service.">
+  <meta name="theme-color" content="#090d16">
+  <title>Contact Support — Vaqz Mobiz</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+  <style>
+    .contact-form{display:grid;gap:16px}
+    .form-field{display:grid;gap:7px}
+    .form-field label{font-size:.9rem;font-weight:750}
+    .form-field input,.form-field textarea{width:100%;min-height:48px;padding:12px 14px;border:1px solid var(--vm-border);border-radius:12px;background:var(--vm-surface-2);color:var(--vm-text);font:inherit;outline:none}
+    .form-field textarea{min-height:140px;resize:vertical}
+    .form-field input::placeholder,.form-field textarea::placeholder{color:#8794a8}
+    .form-field input:focus,.form-field textarea:focus{border-color:#4f8fe8;box-shadow:0 0 0 3px var(--vm-accent-soft)}
+    .form-help{margin:0;color:var(--vm-muted);font-size:.82rem}
+    .form-status{display:none;padding:13px 14px;border:1px solid var(--vm-border);border-radius:12px;background:var(--vm-surface-2);font-size:.9rem}
+    .form-status.visible{display:block}
+    .form-status.error{border-color:#9f4545;color:#ffd0d0}
+    .form-status.success{border-color:#287d58;color:#b7f7d3}
+    .turnstile-wrap{min-height:65px}
+    .honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+    .back-link{display:inline-flex;margin-top:18px;color:#8bc0ff;text-decoration:none;font-weight:700}
+    .back-link:hover{text-decoration:underline}
+    .submit-button{width:100%;border:0;cursor:pointer;font:inherit}
+    .submit-button:disabled{opacity:.6;cursor:wait}
+    @media(max-width:390px){.contact-card{padding:20px}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="Vaqz Mobiz home">VAQZ <span>MOBIZ</span></a>
+    <nav aria-label="Primary navigation"><a href="../">Home</a></nav>
+  </header>
+
+  <main class="container page">
+    <section class="page-header">
+      <p class="eyebrow">VAQZ MOBIZ · CUSTOMER CARE</p>
+      <h1>Contact Support</h1>
+      <p>Tell us what you need help with. If you're online but can't send an SMS, you can submit your message here and we'll follow up as soon as we can.</p>
+    </section>
+
+    <section class="card contact-card" aria-label="Contact form">
+      <form id="contact-form" class="contact-form">
+        <div class="form-field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required placeholder="Enter your name">
+        </div>
+        <div class="form-field">
+          <label for="phone">Contact number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" required placeholder="e.g. 09XXXXXXXXX">
+          <p class="form-help">Include a number where our support team can reach you.</p>
+        </div>
+        <div class="form-field">
+          <label for="message">How can we help?</label>
+          <textarea id="message" name="message" maxlength="1000" required placeholder="Describe the issue with your order or service…"></textarea>
+        </div>
+
+        <div class="honeypot" aria-hidden="true">
+          <label for="website">Leave this field empty</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="form-field">
+          <label>Security check</label>
+          <div id="turnstile-widget" class="turnstile-wrap"></div>
+          <p class="form-help">Complete the security check before sending your message.</p>
+        </div>
+
+        <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+        <button id="submit-button" class="button submit-button" type="submit" disabled>Send message</button>
+      </form>
+      <a class="back-link" href="../">← Back to Vaqz Mobiz</a>
+    </section>
+
+    <aside class="notice">
+      <strong>Privacy note:</strong> Please don't include passwords, verification codes, payment card details, or other sensitive information in your message.
+    </aside>
+  </main>
+
+  <footer class="site-footer"><div class="container">© <span id="year"></span> Vaqz Mobiz. All rights reserved.</div></footer>
+
+  <script>
+    (() => {
+      const API_URL = "https://vaqzmobiz-sms-alert.vaqzvasquez.workers.dev/api/contact";
+      const SITE_KEY = "0x4AAAAAAFe3cCaxknCHbvSu";
+      const form = document.getElementById("contact-form");
+      const statusBox = document.getElementById("form-status");
+      const submitButton = document.getElementById("submit-button");
+      let turnstileToken = "";
+      let widgetId = null;
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      function showStatus(message, type) {
+        statusBox.textContent = message;
+        statusBox.className = "form-status visible " + type;
+      }
+
+      function setToken(token) {
+        turnstileToken = token || "";
+        submitButton.disabled = !turnstileToken;
+      }
+
+      window.onloadTurnstileCallback = function () {
+        widgetId = turnstile.render("#turnstile-widget", {
+          sitekey: SITE_KEY,
+          callback: setToken,
+          "expired-callback": () => setToken(""),
+          "error-callback": () => {
+            setToken("");
+            showStatus("The security check couldn't load. Please refresh the page and try again.", "error");
+          },
+          theme: "dark"
+        });
+      };
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!turnstileToken) {
+          showStatus("Please complete the security check first.", "error");
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending…";
+        statusBox.className = "form-status";
+        const data = new FormData(form);
+        const payload = {
+          name: String(data.get("name") || "").trim(),
+          phone: String(data.get("phone") || "").trim(),
+          message: String(data.get("message") || "").trim(),
+          website: String(data.get("website") || ""),
+          turnstileToken
+        };
+
+        try {
+          const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || result.ok !== true) {
+            throw new Error(result.error || "We couldn't send your message. Please try again.");
+          }
+          form.reset();
+          showStatus("Your message has been sent to Vaqz Mobiz Support. We'll follow up as soon as possible.", "success");
+          if (window.turnstile && widgetId !== null) window.turnstile.reset(widgetId);
+          setToken("");
+        } catch (error) {
+          showStatus(error.message || "Connection error. Please check your internet and try again.", "error");
+          if (window.turnstile && widgetId !== null) window.turnstile.reset(widgetId);
+          setToken("");
+        } finally {
+          submitButton.textContent = "Send message";
+          submitButton.disabled = !turnstileToken;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
