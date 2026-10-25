@@ -1,62 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101010">
-<meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Quick instructions for signing in on your TV.">
-<title>How to Log In on Your TV | Vaqz Mobiz</title>
-<style>
-:root{color-scheme:dark;--muted:#c2c2c2;--red:#e50914;--line:#343434}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#292020 0,#101010 58%);color:#f7f7f7;font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
-main{width:100%;max-width:520px}.brand{font-weight:950;font-size:24px;letter-spacing:-1px;color:var(--red);margin:0 0 16px;text-decoration:none;display:inline-block}
-.card{background:rgba(27,27,27,.97);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,5vw,30px);box-shadow:0 18px 60px #0008}
-.eyebrow{color:#ff7c82;text-transform:uppercase;letter-spacing:1.4px;font-size:11px;font-weight:850}
-h1{font-size:clamp(29px,7vw,38px);line-height:1.08;margin:8px 0;letter-spacing:-1px}.intro{color:var(--muted);margin:0 0 20px;font-size:15px}
-.step{display:grid;grid-template-columns:42px 1fr;gap:12px;border:1px solid var(--line);border-radius:13px;padding:15px;margin-top:12px}
-.number{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#343434;font-size:19px;font-weight:900}
-h2{font-size:17px;line-height:1.25;margin:2px 0 5px}.step p{font-size:14px;color:var(--muted);margin:0 0 13px}
-.button{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px;border:0;border-radius:8px;background:var(--red);color:#fff;font-weight:850;text-decoration:none;text-align:center;cursor:pointer;font-size:15px}
-.button:hover{background:#f6121d}.button:focus-visible{outline:3px solid #fff;outline-offset:3px}.button.disabled{background:#777;color:#191919;pointer-events:none;opacity:.65}
-.code-help{margin-top:14px;border:1px solid #484848;border-radius:8px;overflow:hidden}.code-help summary{cursor:pointer;list-style:none;padding:12px 14px;font-size:14px;font-weight:800;color:#fff;background:#252525}.code-help summary::-webkit-details-marker{display:none}.code-help summary::after{content:'+';float:right;font-size:18px;line-height:1}.code-help[open] summary::after{content:'−'}.code-help summary:focus-visible{outline:2px solid #fff;outline-offset:-3px}
-.code-guide{padding:14px;border-top:1px solid var(--line)}.code-guide p{margin:0 0 12px}.phone-highlight{display:inline-block;background:#fff;color:#111;border:2px solid #fff;border-radius:5px;padding:1px 6px;white-space:nowrap}.code-guide img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid #444;background:#eee}.code-guide small{display:block;color:#999;font-size:11px;margin-top:6px}
-.tip{font-size:12px;color:#bcbcbc;margin:14px 2px 0}.foot{text-align:center;font-size:11px;color:#888;margin:14px 6px 0}.home-link{color:#aaa;text-decoration:none}.home-link:hover{color:#fff;text-decoration:underline}
-@media(max-width:380px){body{padding:12px}.card{padding:17px}.step{padding:12px;grid-template-columns:35px 1fr;gap:9px}.number{width:33px;height:33px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quick instructions for signing in on your TV.">
+  <meta name="theme-color" content="#090d16">
+  <meta name="robots" content="noindex,nofollow">
+  <title>How to Log In on Your TV — Vaqz Mobiz</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .tv-steps{display:grid;gap:14px}
+    .tv-step{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;padding:16px;border:1px solid var(--vm-border);border-radius:var(--vm-radius);background:var(--vm-surface)}
+    .tv-step-number{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--vm-surface-2);font-size:1rem;font-weight:900}
+    .tv-step h2{margin:2px 0 6px;font-size:1.05rem;line-height:1.3}
+    .tv-step p{margin:0 0 14px;color:var(--vm-muted);font-size:.9rem}
+    .tv-step .button{display:flex;width:100%;min-height:50px;padding:12px;text-align:center;white-space:normal}
+    .tv-step .button-disabled{background:#394355;color:#8d9aad;pointer-events:none;opacity:.75}
+    .tv-code-help{margin-top:14px;border:1px solid var(--vm-border);border-radius:12px;overflow:hidden}
+    .tv-code-help summary{cursor:pointer;list-style:none;padding:12px 14px;font-size:.9rem;font-weight:800;color:var(--vm-text);background:var(--vm-surface-2)}
+    .tv-code-help summary::-webkit-details-marker{display:none}
+    .tv-code-help summary::after{content:"+";float:right;font-size:1.15rem;line-height:1}
+    .tv-code-help[open] summary::after{content:"−"}
+    .tv-code-help summary:focus-visible{outline:2px solid var(--vm-accent);outline-offset:-3px}
+    .tv-code-guide{padding:14px;border-top:1px solid var(--vm-border)}
+    .tv-code-guide p{margin:0 0 12px}
+    .tv-phone-highlight{display:inline-block;padding:1px 7px;border:2px solid var(--vm-text);border-radius:6px;background:var(--vm-text);color:var(--vm-bg);font-weight:900;white-space:nowrap}
+    .tv-code-guide img{display:block;width:100%;height:auto;border:1px solid var(--vm-border);border-radius:10px;background:#eee}
+    .tv-code-guide small{display:block;margin-top:7px;color:var(--vm-muted);font-size:.75rem}
+    .tv-tip{margin:16px 2px 0;color:var(--vm-muted);font-size:.82rem}
+    @media(max-width:390px){.tv-step{grid-template-columns:30px minmax(0,1fr);gap:9px;padding:12px}.tv-step-number{width:29px;height:29px}}
+  </style>
 </head>
-<body><main>
-<a class="brand" href="/" aria-label="Vaqz Mobiz home">VAQZ MOBIZ</a>
-<section class="card">
-<div class="eyebrow">2 quick steps</div><h1>How to log in on your TV</h1>
-<p class="intro">Follow the steps below to log in on your TV successfully.</p>
-<section class="step"><div class="number">1</div><div>
-<h2>Prepare your sign-in</h2><p>Tap below to reset your sign-in session. Return to this page immediately and continue to Step 2 below.</p>
-<a id="reset" class="button" href="https://www.netflix.com/clearcookies" target="_blank" rel="noopener noreferrer">STEP 1 · RESET SIGN-IN ↗</a>
-</div></section>
-<section class="step"><div class="number">2</div><div>
-<h2>Continue to TV sign-in</h2><p>After you return to this page, continue below.</p>
-<a id="continue" class="button disabled" href="https://www.netflix.com/tv8" target="_blank" rel="noopener noreferrer" aria-disabled="true">STEP 2 · CONTINUE TO TV ↗</a>
-<details class="code-help">
-<summary>How to find your TV code</summary>
-<div class="code-guide">
-<p>On your TV, select <strong class="phone-highlight">USE PHONE</strong>. Your code should appear on the screen. <strong>USE REMOTE</strong> may hide the code.</p>
-<img src="./tv-code-guide.svg" alt="Illustration of a TV sign-in screen with USE PHONE highlighted and sample code 1234-5678">
-<small>Illustrative example only. Your TV code will be different.</small>
-</div>
-</details>
-</div></section>
-<p class="tip">⚠️ If the wrong account appears, stop and repeat Step 1 before entering your TV code.</p>
-</section>
-<div class="foot"><a class="home-link" href="/">Vaqz Mobiz · Independent sign-in instructions · Home</a></div>
-</main>
-<script>
-const reset=document.getElementById('reset');const button=document.getElementById('continue');
-function enableStepTwo(){button.classList.remove('disabled');button.setAttribute('aria-disabled','false');}
-try{if(sessionStorage.getItem('resetStepClicked')==='yes')enableStepTwo();}catch(e){}
-reset.addEventListener('click',()=>{try{sessionStorage.setItem('resetStepClicked','yes');}catch(e){}enableStepTwo();});
-button.addEventListener('click',event=>{if(button.classList.contains('disabled'))event.preventDefault();});
-</script>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="Vaqz Mobiz home">VAQZ <span>MOBIZ</span></a>
+    <nav aria-label="Primary navigation"><a href="../">Home</a></nav>
+  </header>
+
+  <main class="container page">
+    <section class="page-header">
+      <p class="eyebrow">VAQZ MOBIZ · SIGN-IN GUIDE</p>
+      <h1>How to log in on your TV</h1>
+      <p>Follow the steps below to log in on your TV successfully.</p>
+    </section>
+
+    <section class="tv-steps" aria-label="TV sign-in steps">
+      <section class="tv-step" aria-labelledby="tv-step-one">
+        <div class="tv-step-number" aria-hidden="true">1</div>
+        <div>
+          <h2 id="tv-step-one">Prepare your sign-in</h2>
+          <p>Tap below to reset your sign-in session. Return to this page immediately and continue to Step 2 below.</p>
+          <a id="reset" class="button" href="https://www.netflix.com/clearcookies" target="_blank" rel="noopener noreferrer">STEP 1 · RESET SIGN-IN ↗</a>
+        </div>
+      </section>
+
+      <section class="tv-step" aria-labelledby="tv-step-two">
+        <div class="tv-step-number" aria-hidden="true">2</div>
+        <div>
+          <h2 id="tv-step-two">Continue to TV sign-in</h2>
+          <p>After you return to this page, continue below.</p>
+          <a id="continue" class="button button-disabled" href="https://www.netflix.com/tv8" target="_blank" rel="noopener noreferrer" aria-disabled="true">STEP 2 · CONTINUE TO TV ↗</a>
+
+          <details class="tv-code-help">
+            <summary>How to find your TV code</summary>
+            <div class="tv-code-guide">
+              <p>On your TV, select <strong class="tv-phone-highlight">USE PHONE</strong>. Your code should appear on the screen. <strong>USE REMOTE</strong> may hide the code.</p>
+              <img src="./tv-code-guide.svg" alt="Illustration of a TV sign-in screen with USE PHONE highlighted and sample code 1234-5678">
+              <small>Illustrative example only. Your TV code will be different.</small>
+            </div>
+          </details>
+        </div>
+      </section>
+    </section>
+
+    <p class="tv-tip">⚠️ If the wrong account appears, stop and repeat Step 1 before entering your TV code.</p>
+    <a class="back-link" href="../">← Back to Vaqz Mobiz</a>
+  </main>
+
+  <footer class="site-footer"><div class="container">© <span id="year"></span> Vaqz Mobiz. All rights reserved.</div></footer>
+
+  <script>
+    const reset = document.getElementById("reset");
+    const button = document.getElementById("continue");
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function enableStepTwo() {
+      button.classList.remove("button-disabled");
+      button.setAttribute("aria-disabled", "false");
+    }
+
+    try {
+      if (sessionStorage.getItem("resetStepClicked") === "yes") enableStepTwo();
+    } catch (error) {}
+
+    reset.addEventListener("click", () => {
+      try { sessionStorage.setItem("resetStepClicked", "yes"); } catch (error) {}
+      enableStepTwo();
+    });
+
+    button.addEventListener("click", event => {
+      if (button.classList.contains("button-disabled")) event.preventDefault();
+    });
+  </script>
 </body>
 </html>
